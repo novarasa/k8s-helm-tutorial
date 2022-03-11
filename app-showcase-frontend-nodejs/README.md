@@ -1,5 +1,5 @@
 # App Showcase Frontend NodeJS
-A Simple NodeJS / Express Simple Frontend packaged as a container image.
+A Simple NodeJS / Express Simple Frontend packaged as a container image. The app has a simple UI with 3 HTTP endpoints `/headers` `/health` and `/ping`
 
 ### Pre-Requisites
 * Docker
@@ -12,13 +12,13 @@ node app.js
 ```
 ### Build Docker image
 ```
-docker build -t novarasa/app-showcase-frontend-nodejs .
+docker build -t novarasa/tut-app-showcase-frontend-nodejs .
 ```
 
 ### Run Docker image
 ```
 # Launch
-docker run -p 8084:8084 -d novarasa/app-showcase-frontend-nodejs
+docker run -p 8084:8084 -d novarasa/tut-app-showcase-frontend-nodejs
 
 # Check Process
 docker ps
