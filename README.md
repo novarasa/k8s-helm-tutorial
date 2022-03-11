@@ -31,6 +31,12 @@ kubectl create deployment backend --image=novarasa/tut-app-showcase-backend-java
 ## Using Local Docker Images in Minikube
 https://medium.com/bb-tutorials-and-thoughts/how-to-use-own-local-doker-images-with-minikube-2c1ed0b0968
 https://medium.com/@maumribeiro/running-your-own-docker-images-in-minikube-for-windows-ea7383d931f6
+
+https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+
+Ingress:
+https://www.youtube.com/watch?v=Gip-Q6AWpcY
+
 ### Windows
 ```
 minikube start --driver=docker
