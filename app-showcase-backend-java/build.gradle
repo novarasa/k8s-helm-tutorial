@@ -50,7 +50,7 @@ jib {
 		}
 	}
 	to {
-		image = 'novarasa/tut-app-showcase-backend-java:latest'
+		image = 'novarasa/app-showcase-backend-java:latest'
 		auth {
 			username = ''
 			password = ''

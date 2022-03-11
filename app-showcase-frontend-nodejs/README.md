@@ -12,13 +12,13 @@ node app.js
 ```
 ### Build Docker image
 ```
-docker build -t novarasa/tut-app-showcase-frontend-nodejs .
+docker build -t novarasa/app-showcase-frontend-nodejs .
 ```
 
 ### Run Docker image
 ```
 # Launch
-docker run -p 8084:8084 -d novarasa/tut-app-showcase-frontend-nodejs
+docker run -p 8084:8084 -d novarasa/app-showcase-frontend-nodejs
 
 # Check Process
 docker ps
