@@ -1,0 +1,17 @@
+{
+    "name": "showcase-frontend-nodejs",
+    "version": "0.0.1",
+    "description": "Showcase app frontend",
+    "author": "Raja Sekar <cloudready.raja@gmail.com>",
+    "license": "MIT",
+    "main": "app.js",
+    "keywords": [
+        "nodejs",
+        "bootstrap",
+        "express"
+    ],
+    "dependencies": {
+        "ejs": "^3.1.6",
+        "express": "^4.16.4"
+    }
+}
