@@ -22,7 +22,7 @@ A simple Java Spring Boot application packaged as a container image. The app exp
 #### Docker
 ```
 # Launch
-docker run -p 9090:9090 -d novarasa/tut-app-showcase-backend-java
+docker run -p 9090:9090 -d novarasa/app-showcase-backend-java
 
 # Check Process
 docker ps
