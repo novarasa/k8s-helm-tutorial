@@ -19,7 +19,7 @@ docker image ls
 docker build -t novarasa/app-showcase-frontend-nodejs:0.0.2 .\app-showcase-frontend-nodejs\
 ```
 
-## KUBECTL - Deployments, Services & Ingress
+## KUBECTL - Create Deployments, Services & Ingress
 ```
 # Create namespace
 kubectl apply -f 01-namespace.yaml
@@ -45,6 +45,23 @@ curl http://127.0.0.1:8080/frontend/ping
 
 curl http://127.0.0.1:8080/backend/ping
 curl http://127.0.0.1:8080/backend/actuator/health
+```
+
+## KUBECTL - Delete Deployments, Services & Ingress (Backup)
+```
+# Delete Ingress
+kubectl delete ingress showcase-ingress -n vanillaverse
+
+# Delete Backend Service and Deployment
+kubectl delete service backend-service -n vanillaverse
+kubectl delete deployment backend-deployment -n vanillaverse
+
+# Delete Frontend Service and Deployment
+kubectl delete service frontend-service -n vanillaverse
+kubectl delete deployment frontend-deployment -n vanillaverse
+
+# Delete namespace
+kubectl delete namespace vanillaverse
 ```
 
 ## References
