@@ -15,7 +15,7 @@ docker image ls
 ```
 
 ## Build Container Imanges (using Minikube's Docker daemon)
-``\
+```
 docker build -t novarasa/app-showcase-frontend-nodejs:0.0.2 .\app-showcase-frontend-nodejs\
 ```
 
