@@ -49,16 +49,16 @@ curl http://127.0.0.1:8080/backend/actuator/health
 
 ## References
 ### Ingress
-https://kubernetes.github.io/ingress-nginx/user-guide/ingress-path-matching/
-https://kubernetes.github.io/ingress-nginx/examples/rewrite/
-https://minikube.sigs.k8s.io/docs/handbook/accessing/
-https://github.com/cloudxlab/minikube-static-app
-https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
-https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/
+* https://kubernetes.github.io/ingress-nginx/user-guide/ingress-path-matching/
+* https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+* https://minikube.sigs.k8s.io/docs/handbook/accessing/
+* https://github.com/cloudxlab/minikube-static-app
+* https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+* https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/
 
 ### Java - Liveness and Readiness
-https://www.baeldung.com/spring-liveness-readiness-probes
-https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+* https://www.baeldung.com/spring-liveness-readiness-probes
+* https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 
 ### minikube addons (gotcha)
-https://robearlam.com/blog/nginx-ingress-breaking-change-ingress.class-now-required 
+* https://robearlam.com/blog/nginx-ingress-breaking-change-ingress.class-now-required 
