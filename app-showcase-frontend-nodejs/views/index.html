@@ -44,7 +44,7 @@
     <script type="text/javascript">
         function getHeaders() {
             var obj;
-            fetch('./headers')
+            fetch('/headers')
                 .then(response => response.json())
                 .then(json => {
                     obj = JSON.stringify(json)
@@ -55,7 +55,7 @@
     <script type="text/javascript">
         function getHealth() {
             var obj;
-            fetch('./health')
+            fetch('/health')
                 .then(response => response.json())
                 .then(json => {
                     obj = JSON.stringify(json)
@@ -66,7 +66,7 @@
     <script type="text/javascript">
         function getPong() {
             var obj;
-            fetch('./ping')
+            fetch('/ping')
                 .then(response => response.json())
                 .then(json => {
                     obj = JSON.stringify(json)
