@@ -12,7 +12,7 @@ node app.js
 ```
 ### Build Docker image
 ```
-docker build -t novarasa/app-showcase-frontend-nodejs .
+docker build -t novarasa/app-showcase-frontend-nodejs:0.0.2 .
 ```
 
 ### Run Docker image
