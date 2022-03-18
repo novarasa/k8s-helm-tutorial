@@ -1,0 +1,48 @@
+{{- $projectName := .Values.global.config.name -}}
+{{- $projectNamespace := .Values.global.config.namespace -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $projectName }}-backend
+  namespace: {{ $projectNamespace }}
+  
+  labels:
+    app.kubernetes.io/name: {{ $projectName }}-backend
+    app.kubernetes.io/managed-by: helm3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $projectName }}-backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ $projectName }}-backend
+    spec:
+      securityContext:
+        {}
+      containers:
+        - name: backend
+          securityContext:
+            {}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- toYaml .Values.image.env | nindent 10 }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.image.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.image.livenessProbe.httpGet.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.image.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.image.livenessProbe.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.image.readinessProbe.httpGet.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.image.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.image.readinessProbe.periodSeconds }} 

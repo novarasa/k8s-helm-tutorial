@@ -1,0 +1,46 @@
+global:
+  config:
+    name: athena
+    namespace: athena
+
+frontend:
+  image:
+    repository: "novarasa/app-showcase-frontend-nodejs"
+    tag: "0.0.2"
+    containerPort: 8084
+    env:
+    - name: APP_NAME
+      value: athena
+    pullPolicy: Never
+    livenessProbe:
+      httpGet:
+        path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    readinessProbe:
+      httpGet:
+        path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5      
+
+backend:
+  image:
+    repository: "novarasa/app-showcase-backend-java"
+    tag: "latest"
+    containerPort: 9090
+    pullPolicy: Never   
+    env:
+    - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB
+      value: "DEBUG"
+    livenessProbe:
+      httpGet:
+        path: /actuator/health
+        port: http
+      initialDelaySeconds: 30
+      periodSeconds: 30
+    readinessProbe:
+      httpGet:
+        path: /actuator/health
+        port: http
+      initialDelaySeconds: 30
+      periodSeconds: 30

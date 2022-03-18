@@ -50,7 +50,7 @@ curl http://127.0.0.1:8080/backend/actuator/health
 ## KUBECTL - Delete Deployments, Services & Ingress (Backup)
 ```
 # Delete Ingress
-kubectl delete ingress showcase-ingress -n vanillaverse
+kubectl delete ingress vanillaverse-ingress -n vanillaverse
 
 # Delete Backend Service and Deployment
 kubectl delete service backend-service -n vanillaverse
