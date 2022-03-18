@@ -1,7 +1,7 @@
 # Helm Release Manager
 
 ## Scope
-In this tutorial, you will be create a namespace called `athena` and creating a `deployment` and `service` for both (frontend) and (backend) apps and exposing the services via an `ingress`
+In this tutorial, you will be creating a namespace called `athena` and creating a `deployment` and `service` for both (frontend) and (backend) apps and exposing the services via an `ingress`
 
 ```mermaid
 graph LR;
@@ -47,6 +47,7 @@ kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 
 ```
 
 ## Access the apps
+Browser - http://127.0.0.1:8080/athena-frontend/
 ```
 curl http://127.0.0.1:8080/athena-frontend/headers
 curl http://127.0.0.1:8080/athena-frontend/health
