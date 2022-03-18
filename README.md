@@ -1,59 +1,31 @@
 # Kubernetes and Helm Tutorial
-In this tutorial, you will learn how to use Kubernetes and Helm locally on your workstation. 
+In this tutorial, you will learn how to build simple containerized applications using Docker and deploy the apps to Kubernetes.
 
-1. Start Minikube (with Ingress Controller & Docker Daemon)
-2. Build a container image for app-showcase-frontend-nodejs
-3. Build a container image for app-showcase-backend-java
-4. Helm install (2 deployments)
+## Prerequisites
+* Java 11+ / Gradle 7+
+* NPM
+* [Docker](https://www.docker.com/get-started/) 
+* [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+* [Helm3](https://helm.sh/docs/intro/install/) 
 
-## References
-NGINX Ingress - Minikube https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+## Key Takeaways
+1. Build container images for NodeJS / Java apps
+2. Configure & Run Minikube (with Ingress Controller & Docker Daemon)
+3. Deploying apps to Kubernetes (using kubectl)
+4. Deploying apps to Kubernetes (using Helm3)
 
-https://codefresh.io/docs/docs/new-helm/helm-best-practices/
-https://insights.project-a.com/whats-the-best-way-to-manage-helm-charts-1cbf2614ec40
-https://www.youtube.com/watch?v=Uh3rqCR69MA&ab_channel=AntonPutra
-https://helm.sh/docs/chart_template_guide/subcharts_and_globals/
+## Minikube - Setup & Notes
+**Important:** Complete the [Minikube Setup](README-Minikube-Setup.md) before starting the tutorial
 
-## Minikube - NGINX Ingress Installation
-https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
-```
-minikube addons enable ingress
+## Tutorial
+### Step 1
+Build a simple (frontend) NodeJS application. See [app-showcase-frontend-nodejs/README](app-showcase-frontend-nodejs/README.md)
 
-kubectl get pods -n ingress-nginx
-```
+### Step 2
+Build a simple (backend) Java application. See [app-showcase-backend-java/README](app-showcase-backend-java/README.md)
 
-## Create Sample Deployments
-```
-kubectl create deployment frontend --image=novarasa/tut-app-showcase-frontend-nodejs:latest
-kubectl create deployment backend --image=novarasa/tut-app-showcase-backend-java:latest
-```
+### Step 3
+Deploy the (frontend) and (backend) apps to Kubernetes (Minikube) using `kubectl`. See [kubectl-release-manager/README](kubectl-release-manager/README.md). It is important you understand the Kubernetes resource kinds, YAML specification & `kubectl` commands before moving to `helm`
 
-## Using Local Docker Images in Minikube
-https://medium.com/bb-tutorials-and-thoughts/how-to-use-own-local-doker-images-with-minikube-2c1ed0b0968
-https://medium.com/@maumribeiro/running-your-own-docker-images-in-minikube-for-windows-ea7383d931f6
-
-https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
-
-Ingress:
-https://www.youtube.com/watch?v=Gip-Q6AWpcY
-
-### Windows
-```
-minikube start --driver=docker
-minikube docker-env
-minikube docker-env | Invoke-Expression
-docker images
-docker build -t novarasa/app-showcase-frontend-nodejs .\app-showcase-frontend-nodejs\
-```
-```
-eval $(minikube -p minikube docker-env)
-
-minikube ssh
-
-docker images
-```
-Minikube comes with its own docker daemon and not able to find images by default
-We need to set the environment variables with eval $(minikube docker-env).
-We need to build the docker image after we set the environment variables above and make sure to tag the image as same as in the deployment yaml file.
-We have to set ImagePullPolicy to Never in order to use local docker images with the deployment.
-We can unset the environment variables with this command eval $(minikube docker-env -u)
+### Step 4
+Deploy the (frontend) and (backend) apps to Kubernetes (Minikube) using `helm`. See [helm-release-manager/README](helm-release-manager/README.md)
