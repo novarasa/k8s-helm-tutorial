@@ -1,13 +1,16 @@
 # Helm Release Manager
-Sample release management using Helm (Parent & Sub Charts)
+
+## Scope
+In this tutorial, you will be create a namespace called `athena` and creating a `deployment` and `service` for both (frontend) and (backend) apps and exposing the services via an `ingress`
 
 ```mermaid
 graph LR;
- client([client])-. Ingress-managed <br> load balancer .->ingress[Ingress];
+ client([client])-. Ingress-managed <br> load balancer .->ingress[Ingress<br>athena-ingress];
  ingress-->|/frontend/*|service-frontend[Service<br>athena-frontend];
  ingress-->|/backend/*|service-backend[Service<br>athena-backend];
 
  subgraph athena-namespace
+ ingress;
  service-frontend;
  service-backend;
  service-frontend-->pod1[Pod<br>athena-frontend];
@@ -15,7 +18,6 @@ graph LR;
  end
 
  subgraph cluster
- ingress;
  athena-namespace;
  end
 

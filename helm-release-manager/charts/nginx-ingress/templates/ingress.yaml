@@ -20,14 +20,14 @@ spec:
   rules:
     - http:
         paths:
-          - path: /frontend(/|$)(.*)
+          - path: /{{ $projectName }}-frontend(/|$)(.*)
             pathType: Prefix  
             backend:
               service:
                 name: {{ $projectName }}-frontend
                 port:
                   number: 8080
-          - path: /backend(/|$)(.*)
+          - path: /{{ $projectName }}-backend(/|$)(.*)
             pathType: Prefix  
             backend:
               service:

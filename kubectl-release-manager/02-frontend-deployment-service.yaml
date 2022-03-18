@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
-  namespace: vanillaverse
+  name: apollo-frontend
+  namespace: apollo
   labels:
-    app.kubernetes.io/name: frontend
+    app.kubernetes.io/name: apollo-frontend
     app.kubernetes.io/managed-by: kubectl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: frontend
+      app.kubernetes.io/name: apollo-frontend
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: frontend
+        app.kubernetes.io/name: apollo-frontend
     spec:
       securityContext:
         {}
       containers:
-        - name: frontend
+        - name: apollo-frontend
           securityContext:
             {}
           image: "novarasa/app-showcase-frontend-nodejs:0.0.2"
@@ -40,10 +40,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
-  namespace: vanillaverse
+  name: apollo-frontend
+  namespace: apollo
   labels:
-    app.kubernetes.io/name: frontend
+    app.kubernetes.io/name: apollo-frontend
     app.kubernetes.io/managed-by: kubectl
 spec:
   type: ClusterIP
@@ -53,4 +53,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: frontend
+    app.kubernetes.io/name: apollo-frontend

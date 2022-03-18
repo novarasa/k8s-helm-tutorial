@@ -1,22 +1,32 @@
 # Vanilla Kubernetes Deployments
 
-## Setup Minikube, NGINX Ingress Controller & Docker daemon
-```
-# Start Minikube
-minikube start --driver=docker
+## Scope
+In this tutorial, you will be create a namespace called `apollo` and creating a `deployment` and `service` for both (frontend) and (backend) apps and exposing the services via an `ingress`
 
-# Install Ingress (minikube addons enable ingress - has a bug in ConfigMap name)
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+```mermaid
+graph LR;
+ client([client])-. Ingress-managed <br> load balancer .->ingress[Ingress<br>apollo-ingress];
+ ingress-->|/frontend/*|service-frontend[Service<br>apollo-frontend];
+ ingress-->|/backend/*|service-backend[Service<br>apollo-backend];
 
-# Use Minikube's Docker Daemon
-minikube docker-env
-minikube docker-env | Invoke-Expression
-docker image ls
-```
+ subgraph apollo-namespace
+ ingress;
+ service-frontend;
+ service-backend;
+ service-frontend-->pod1[Pod<br>apollo-frontend];
+ service-backend-->pod2[Pod<br>apollo-backend];
+ end
 
-## Build Container Imanges (using Minikube's Docker daemon)
-```
-docker build -t novarasa/app-showcase-frontend-nodejs:0.0.2 .\app-showcase-frontend-nodejs\
+ subgraph cluster
+ apollo-namespace;
+ end
+
+ classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+ classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+ classDef namespace fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+ class ingress,service-frontend,service-backend,pod1,pod2 k8s;
+ class client plain;
+ class apollo-namespace namespace;
 ```
 
 ## KUBECTL - Create Deployments, Services & Ingress
@@ -39,40 +49,32 @@ kubectl port-forward --namespace=ingress-nginx service/ingress-nginx-controller 
 
 ## Access the apps
 ```
-curl http://127.0.0.1:8080/frontend/headers
-curl http://127.0.0.1:8080/frontend/health
-curl http://127.0.0.1:8080/frontend/ping
+curl http://127.0.0.1:8080/apollo-frontend/headers
+curl http://127.0.0.1:8080/apollo-frontend/health
+curl http://127.0.0.1:8080/apollo-frontend/ping
 
-curl http://127.0.0.1:8080/backend/ping
-curl http://127.0.0.1:8080/backend/actuator/health
+curl http://127.0.0.1:8080/apollo-backend/ping
+curl http://127.0.0.1:8080/apollo-backend/actuator/health
 ```
 
 ## KUBECTL - Delete Deployments, Services & Ingress (Backup)
 ```
 # Delete Ingress
-kubectl delete ingress vanillaverse-ingress -n vanillaverse
+kubectl delete ingress apollo-ingress -n apollo
 
 # Delete Backend Service and Deployment
-kubectl delete service backend-service -n vanillaverse
-kubectl delete deployment backend-deployment -n vanillaverse
+kubectl delete service apollo-backend -n apollo
+kubectl delete deployment apollo-backend -n apollo
 
 # Delete Frontend Service and Deployment
-kubectl delete service frontend-service -n vanillaverse
-kubectl delete deployment frontend-deployment -n vanillaverse
+kubectl delete service apollo-frontend -n apollo
+kubectl delete deployment apollo-frontend -n apollo
 
 # Delete namespace
-kubectl delete namespace vanillaverse
+kubectl delete namespace apollo
 ```
 
 ## References
-### Ingress
-* https://kubernetes.github.io/ingress-nginx/user-guide/ingress-path-matching/
-* https://kubernetes.github.io/ingress-nginx/examples/rewrite/
-* https://minikube.sigs.k8s.io/docs/handbook/accessing/
-* https://github.com/cloudxlab/minikube-static-app
-* https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
-* https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/
-
 ### Java - Liveness and Readiness
 * https://www.baeldung.com/spring-liveness-readiness-probes
 * https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
